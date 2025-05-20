@@ -1,76 +1,30 @@
-# Documentação de Webhook
+# Documentação de Webhook da Checkmob
 
-## Introdução
+Bem-vindo à documentação de Webhook da Checkmob. Este guia ajudará você a entender como integrar e trabalhar com o sistema de webhook da Checkmob.
 
-Webhooks são chamadas HTTP enviadas automaticamente por um sistema para notificar outro sistema sobre eventos ocorridos. Esta documentação explica como configurar e utilizar um webhook.
+## O que é um Webhook?
 
-## Como Funciona
+Um webhook é uma forma da Checkmob enviar dados em tempo real para sua aplicação sempre que eventos específicos ocorrerem. Em vez de sua aplicação precisar consultar constantemente os servidores da Checkmob por atualizações, a Checkmob enviará automaticamente os dados para seu endpoint especificado.
 
-1. Um evento ocorre no sistema emissor.
-2. O sistema emissor envia uma requisição HTTP POST para a URL do webhook.
-3. O sistema receptor processa os dados recebidos e executa uma ação correspondente.
+## Principais Recursos
 
-## Configuração do Webhook
+- Notificações de eventos em tempo real
+- Comunicação segura
+- Suporte a múltiplos tipos de eventos
+- Fácil integração
+- Sistema de entrega confiável
 
-### 1. Criando um Endpoint para Receber o Webhook
+## Começando
 
-O endpoint deve ser capaz de receber requisições HTTP POST com dados no formato JSON. Exemplo em Python (Flask):
+Para começar com os webhooks da Checkmob:
 
-```python
-from flask import Flask, request, jsonify
+1. Leia a [Introdução](webhook/introduction.md) para entender os conceitos básicos
+2. Siga o guia de [Configuração](webhook/configuration.md) para configurar seu webhook
+3. Aprenda sobre os [Eventos](webhook/events.md) disponíveis
+4. Revise as melhores práticas de [Segurança](webhook/security.md)
+5. Confira os [Exemplos](webhook/examples.md) para orientação de implementação
 
-app = Flask(__name__)
+## Suporte
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    data = request.json
-    print("Recebido webhook:", data)
-    return jsonify({"message": "Webhook recebido com sucesso!"}), 200
-
-if __name__ == '__main__':
-    app.run(port=5000)
-```
-
-### 2. Configurando o Webhook no Sistema Emissor
-
-No sistema emissor, registre a URL do webhook (`http://seu-servidor.com/webhook`) e escolha quais eventos deseja monitorar.
-
-### 3. Estrutura da Requisição
-
-A requisição HTTP POST enviada pelo sistema emissor geralmente tem este formato:
-
-```
-POST /webhook HTTP/1.1
-Host: seu-servidor.com
-Content-Type: application/json
-
-{
-  "evento": "usuario_registrado",
-  "dados": {
-    "id": 123,
-    "nome": "João Silva",
-    "email": "joao@example.com"
-  }
-}
-```
-
-## Tratamento e Segurança
-
-- **Valide os dados recebidos** para evitar ataques.
-- **Use autenticação** com um token secreto para garantir que os webhooks sejam de uma fonte confiável.
-- **Responda rapidamente** (dentro de 5 segundos) para evitar falhas no webhook.
-
-## Testando o Webhook
-
-Use o `curl` para testar o webhook manualmente:
-
-```sh
-curl -X POST http://localhost:5000/webhook \
-     -H "Content-Type: application/json" \
-     -d '{"evento": "teste", "dados": {"mensagem": "Hello Webhook"}}'
-```
-
-## Conclusão
-
-Agora você sabe como configurar e utilizar um webhook para receber notificações automáticas entre sistemas!!!!!!
+Se precisar de ajuda com sua integração de webhook, entre em contato com nossa equipe de suporte em support@checkmob.com
 

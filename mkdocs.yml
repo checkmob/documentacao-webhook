@@ -1,1 +1,26 @@
-site_name: My Docs
+site_name: Checkmob Webhook Documentation
+site_description: Documentation for Checkmob Webhook Integration
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Webhook Guide:
+    - Introduction: webhook/introduction.md
+    - Configuration: webhook/configuration.md
+    - Events: webhook/events.md
+    - Security: webhook/security.md
+    - Examples: webhook/examples.md
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - admonition
+  - footnotes
