@@ -42,7 +42,7 @@ Inclui informações como código, nome, documentos, contatos, localização, se
 ```json
 {
   "Tipo": 1,
-  "cliente": {
+  "Data": {
     "IdCliente": 12345678,
     "Nome": "Cliente Exemplo",
     "Cnpj": "12.345.678/0001-90",
@@ -97,7 +97,7 @@ Inclui informações como código, status, cliente, localização, horários, ob
 ```json
 {
   "Tipo": 2,
-  "data": 
+  "Data": 
     {
       "Codigo": 12345678,
       "IdCliente": 87654321,
