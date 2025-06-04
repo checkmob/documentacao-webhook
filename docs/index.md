@@ -12,7 +12,7 @@ Webhooks são chamadas HTTP enviadas automaticamente por um sistema para notific
 
 ## Configuração do Webhook
 
-### 1. Criando um Endpoint para Receber o Webhook Checkmob
+### 1. Criando um Endpoint para Receber o Webhook new
 
 O endpoint deve ser capaz de receber requisições HTTP POST com dados no formato JSON. Exemplo em Python (Flask):
 
