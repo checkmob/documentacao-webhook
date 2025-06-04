@@ -4,7 +4,7 @@
 
 Webhooks são chamadas HTTP enviadas automaticamente por um sistema para notificar outro sistema sobre eventos ocorridos. Esta documentação explica como configurar e utilizar um webhook.
 
-## Como Funciona
+## Como Funciona o Webhook
 
 1. Um evento ocorre no sistema emissor.
 2. O sistema emissor envia uma requisição HTTP POST para a URL do webhook.
