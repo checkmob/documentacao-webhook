@@ -1,76 +1,117 @@
-# Documentação de Webhook
+# Webhook - Checkmob
 
-## Introdução
+## O que é Webhook?
 
-Webhooks são chamadas HTTP enviadas automaticamente por um sistema para notificar outro sistema sobre eventos ocorridos. Esta documentação explica como configurar e utilizar um webhook.
+Webhook é um método de comunicação entre sistemas que permite que um sistema envie automaticamente dados para outro sistema em tempo real quando um evento específico ocorre. É como um "callback" ou "notificação" que um sistema envia para outro através de uma requisição HTTP POST.
 
-## Como Funciona o Webhook
+### Principais características:
+- **Comunicação em tempo real**: Os dados são enviados instantaneamente quando um evento ocorre
+- **Automação**: Não requer intervenção manual para o envio das informações
+- **Eficiência**: Reduz a necessidade de consultas constantes (polling) ao sistema
+- **Flexibilidade**: Pode ser configurado para diferentes tipos de eventos
 
-1. Um evento ocorre no sistema emissor.
-2. O sistema emissor envia uma requisição HTTP POST para a URL do webhook.
-3. O sistema receptor processa os dados recebidos e executa uma ação correspondente.
+O webhook será chamado sempre que ocorrerem eventos relevantes no sistema, de acordo com os tipos de dados descritos abaixo.
 
-## Configuração do Webhook
+## Estrutura Geral da Requisição
 
-### 1. Criando um Endpoint para Receber o Webhook new
-
-O endpoint deve ser capaz de receber requisições HTTP POST com dados no formato JSON. Exemplo em Python (Flask):
-
-```python
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    data = request.json
-    print("Recebido webhook:", data)
-    return jsonify({"message": "Webhook recebido com sucesso!"}), 200
-
-if __name__ == '__main__':
-    app.run(port=5000)
-```
-
-### 2. Configurando o Webhook no Sistema Emissor
-
-No sistema emissor, registre a URL do webhook (`http://seu-servidor.com/webhook`) e escolha quais eventos deseja monitorar.
-
-### 3. Estrutura da Requisição
-
-A requisição HTTP POST enviada pelo sistema emissor geralmente tem este formato:
-
-```
-POST /webhook HTTP/1.1
-Host: seu-servidor.com
-Content-Type: application/json
-
+```json
 {
-  "evento": "usuario_registrado",
-  "dados": {
-    "id": 123,
-    "nome": "João Silva",
-    "email": "joao@example.com"
-  }
+  "Tipo": 1,
+  "Data": [
+    {
+      // Dados específicos do tipo
+    }
+  ]
 }
 ```
 
-## Tratamento e Segurança
+- **Tipo**: Define o tipo de evento.
+- **Data**: Lista com os objetos do evento.
 
-- **Valide os dados recebidos** para evitar ataques.
-- **Use autenticação** com um token secreto para garantir que os webhooks sejam de uma fonte confiável.
-- **Responda rapidamente** (dentro de 5 segundos) para evitar falhas no webhook.
+## Tipos de Evento
 
-## Testando o Webhook
+### Tipo 1 - Criação e Edição de Cliente
 
-Use o `curl` para testar o webhook manualmente:
+Enviado sempre que um cliente é criado ou editado no sistema.
 
-```sh
-curl -X POST http://localhost:5000/webhook \
-     -H "Content-Type: application/json" \
-     -d '{"evento": "teste", "dados": {"mensagem": "Hello Webhook"}}'
+#### Estrutura dos dados:
+Inclui informações como código, nome, documentos, contatos, localização, segmentos e campos personalizados.
+
+#### Exemplo de JSON:
+
+```json
+{
+  "Tipo": 1,
+  "Data": [
+    {
+      // Dados específicos do tipo
+    }
+  ]
+}
 ```
 
-## Conclusão
+### Tipo 2 - Registro Realizado
 
-Agora você sabe como configurar e utilizar um webhook para receber notificações automáticas entre sistemas!!!!!!
+Enviado quando um registro (check-in, atendimento ou execução de serviço) é realizado no aplicativo.
+
+#### Estrutura dos dados:
+Inclui informações como código, status, cliente, localização, horários, observações e dados operacionais.
+
+#### Exemplo de JSON:
+
+```json
+{
+  "Tipo": 2,
+  "Data": [
+    {
+      // Dados específicos do tipo
+    }
+  ]
+}
+```
+
+### Tipo 3 - Checklist Respondido
+
+Enviado quando um checklist é respondido no aplicativo.
+
+#### Estrutura dos dados:
+Inclui informações como identificador, nome, datas de vigência, cabeçalho, rodapé, configurações e descrição.
+
+#### Exemplo de JSON:
+
+```json
+{
+  "Tipo": 3,
+  "Data": [
+    {
+      // Dados específicos do tipo
+    }
+  ]
+}
+```
+
+## Observações
+
+- O webhook envia os dados sempre dentro de um array na propriedade Data, mesmo que haja apenas um item.
+- O campo Tipo permite identificar rapidamente o tipo de evento recebido.
+- O formato dos dados em Data varia conforme o valor de Tipo.
+
+## Configuração e Suporte
+
+### Configuração do Webhook
+Para receber as notificações dos eventos, é necessário configurar a URL do webhook nas configurações do sistema Checkmob. Esta URL será o endpoint que receberá todas as notificações dos eventos configurados.
+
+### Suporte Técnico
+Em caso de dúvidas sobre a implementação, configuração ou funcionamento do webhook, nossa equipe de suporte está disponível para auxiliar. Entre em contato através dos canais de suporte da Checkmob.
+
+## Conclusão
+Para garantir o melhor funcionamento, recomendamos:
+
+- Implementar tratamento de erros adequado
+- Configurar timeouts apropriados
+- Manter um log das requisições recebidas
+
+
+Esta documentação fornece todas as informações necessárias para implementar e utilizar o webhook da Checkmob. O sistema foi projetado para ser robusto, seguro e fácil de integrar, permitindo que você receba atualizações em tempo real sobre eventos importantes do seu negócio.
+
 
