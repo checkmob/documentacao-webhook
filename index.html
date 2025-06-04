@@ -59,7 +59,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#como-funciona" class="nav-link">Como Funciona</a>
+            <li class="nav-item" data-bs-level="2"><a href="#como-funciona-o-webhook" class="nav-link">Como Funciona o Webhook</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -89,14 +89,14 @@
 <h1 id="documentacao-de-webhook">Documentação de Webhook</h1>
 <h2 id="introducao">Introdução</h2>
 <p>Webhooks são chamadas HTTP enviadas automaticamente por um sistema para notificar outro sistema sobre eventos ocorridos. Esta documentação explica como configurar e utilizar um webhook.</p>
-<h2 id="como-funciona">Como Funciona</h2>
+<h2 id="como-funciona-o-webhook">Como Funciona o Webhook</h2>
 <ol>
 <li>Um evento ocorre no sistema emissor.</li>
 <li>O sistema emissor envia uma requisição HTTP POST para a URL do webhook.</li>
 <li>O sistema receptor processa os dados recebidos e executa uma ação correspondente.</li>
 </ol>
 <h2 id="configuracao-do-webhook">Configuração do Webhook</h2>
-<h3 id="1-criando-um-endpoint-para-receber-o-webhook">1. Criando um Endpoint para Receber o Webhook</h3>
+<h3 id="1-criando-um-endpoint-para-receber-o-webhook-checkmob">1. Criando um Endpoint para Receber o Webhook Checkmob</h3>
 <p>O endpoint deve ser capaz de receber requisições HTTP POST com dados no formato JSON. Exemplo em Python (Flask):</p>
 <pre><code class="language-python">from flask import Flask, request, jsonify
 
@@ -223,5 +223,5 @@ Content-Type: application/json
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-03-12 13:49:52.938352+00:00
+Build Date UTC : 2025-06-04 14:16:54.424260+00:00
 -->
