@@ -1,0 +1,36 @@
+name: Publicar documentação
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Mesmas versões usadas nos deploys manuais, para não mudar o visual do site.
+      - run: pip install mkdocs==1.6.1 mkdocs-material==9.6.14
+
+      - name: Configurar git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Sem a gh-pages local o gh-deploy cria um commit órfão e o push é recusado; buscando antes, o histórico dos deploys é mantido.
+      - run: git fetch origin gh-pages:gh-pages
+
+      - run: mkdocs gh-deploy
